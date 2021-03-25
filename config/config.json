@@ -1,0 +1,13 @@
+{
+    "API_URL" : "/api/v1",
+    "PORT" : "3000",
+    "url":"mongodb://localhost:27017",
+    "dbname":"eClass",
+    "DATABASE":{
+        "DB_URL" : "mongodb://localhost:27017",
+        "DB_NAME":"eClass"
+    }
+
+
+}
+

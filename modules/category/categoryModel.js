@@ -3,7 +3,7 @@ const categorySchema = mongoose.Schema({
 
     title : {
         type : String,
-        required : true,
+         required : true,
     },
     icon : {
         type : String
@@ -13,7 +13,7 @@ const categorySchema = mongoose.Schema({
     },
     status : {
         type : Boolean,
-        default : 0 ,
+        default : 1,
     }
 
 })
