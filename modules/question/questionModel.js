@@ -3,10 +3,14 @@ const questionSchema = mongoose.Schema({
     user : {
         type : 'user',
         ref : mongoose.SchemaType.ObjectId,
+        required: true,
+
     },
     course : {
         type : 'course',
-        ref : mongoose.SchemaType.ObjectId
+        ref : mongoose.SchemaType.ObjectId,
+        required: true,
+
     },
     title : {
         type : String,

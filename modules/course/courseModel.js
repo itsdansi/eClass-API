@@ -22,24 +22,27 @@ const courseSchema = mongoose.Schema({
         type : String,
     },
     category : {
-        type : 'course',
-        ref : mongoose.SchemaType.ObjectId
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : 'category',
+        required : true,
     },
     price : {
         type : Number,
         required : true
     },
-    hasDiscount : {
-        type : Boolean,
-        default : true
-    },
+    // hasDiscount : {
+    //     type : Boolean,
+    //     default : true
+    // },
     discount : {
         type : Number,
         default : "0"
     },
     user : {
-        type : 'user',
-        ref : mongoose.SchemaType.ObjectId
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : 'user',
+        required : true,
+
     },
     thumbnail : {
         type : String,

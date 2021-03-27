@@ -6,13 +6,15 @@ const lessonSchema = mongoose.Schema({
         required : true,
     },
     duration : {
-        type : Number,
+        type : String,
         required : true,
     },
-    course : {
-        type : 'course',
-        ref : mongoose.SchemaTypes.ObjectId,
-    },
+    // course : {
+    //     type : 'course',
+    //     ref : mongoose.SchemaTypes.ObjectId,
+    //   required: true,
+        
+    // },
     videoUrl : {
         type : String,
         required : true
