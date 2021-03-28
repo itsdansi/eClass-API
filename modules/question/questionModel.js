@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const questionSchema = mongoose.Schema({
+    title : {
+        type : String,
+        required : true
+    },
     user : {
-        type : 'user',
-        ref : mongoose.SchemaType.ObjectId,
+        type :  mongoose.SchemaTypes.ObjectId,
+        ref :'user',
         required: true,
 
     },
     course : {
-        type : 'course',
-        ref : mongoose.SchemaType.ObjectId,
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : 'course',
         required: true,
 
-    },
-    title : {
-        type : String,
-        required : true
     },
     status : {
         type : Boolean,

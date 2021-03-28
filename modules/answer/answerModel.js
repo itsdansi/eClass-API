@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 const answerSchema = mongoose.Schema({
 
-    question : {
-        type : 'question',
-        ref : mongoose.SchemaTypes.ObjectId
-    },
-    course : {
-        type : 'course',
-        ref : mongoose.SchemaType.ObjectId,
-    },
     title : {
         type : String,
         required : true,
     },
+    question : {
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : 'question'
+    },
+    course : {
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : 'course'
+    },
+  
     status : {
         type : Boolean,
         default : 1
