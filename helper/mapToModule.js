@@ -33,7 +33,44 @@ function mapToAnswer(ans, newAns){
 }
 
 
+function mapToSlider(slider, newSlider){
+    if(newSlider.title){
+        slider.title = newSlider.title;
+    }
+    if(newSlider.desc){
+        slider.desc = newSlider.desc
+    }
+    if(newSlider.imageUrl){
+        slider.imageUrl = newSlider.imageUrl
+    }
+       
+    if(newSlider.status){
+            slider.status = newSlider.status;
+    }
+}
+
+function mapToRating(rating, newRating){
+    if(newRating.rating){
+        rating.rating = newRating.rating
+    }
+    if(newRating.comment){
+        rating.comment = newRating.comment
+    }
+    if(newRating.user){
+        rating.user = newRating.user
+    }
+    if(newRating.course){
+        rating.course = newRating.course
+    }
+    if(newRating.status){
+        rating.stauts = newRating.status
+    }
+}
+
+
 module.exports = {
     mapToCourse,
-    mapToAnswer
+    mapToAnswer,
+    mapToSlider,
+    mapToRating,
 }

@@ -8,12 +8,12 @@ const conxn = config.url + '/' + config.dbname
 //for dev and local database server
 mongoose.connect(
     conxn,
-    { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false },
-    function (err, done) {
+    { useNewUrlParser: true,useCreateIndex:true, useUnifiedTopology: true , useFindAndModify: false },
+    function (err, done) {  
         if (err) {
             console.log('Error connecting to db >>' + err)
         } else {
-            console.log('db connection success')
+            console.log('db connection successs')
         }
     }
 )

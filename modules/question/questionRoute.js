@@ -5,7 +5,7 @@ const questionModel = require('./questionModel');
 const mapToModule = require('../../helper/mapToModule')
 
  // Router & controller save question
- router.post('/',(req, res)=>{
+ router.post('/',(req, res)=>{      
     const question = new questionModel(  {
       title : req.body.title,
         course : req.body.course,

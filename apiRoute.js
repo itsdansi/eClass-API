@@ -8,8 +8,9 @@ const lessonRoute = require('./modules/lesson/lessonRoute');
 const courseRoute = require('./modules/course/courseRoute');
 const questionRoute = require('./modules/question/questionRoute');
 const answerRoute = require('./modules/answer/answerRoute');
-
-
+const sliderRoute = require('./modules/slider/sliderRoute');
+const ratingRoute = require('./modules/rating/ratingRoute');
+const enrollRoute = require('./modules/enroll/enrollRoute');
 
 
 router.use('/category',categoryRoute);
@@ -19,6 +20,9 @@ router.use('/lesson',lessonRoute);
 router.use('/course',courseRoute);
 router.use('/question',questionRoute);
 router.use('/answer', answerRoute);
+router.use('/slider', sliderRoute);
+router.use('/rating', ratingRoute);
+router.use('/enroll',enrollRoute);
 
 
 
