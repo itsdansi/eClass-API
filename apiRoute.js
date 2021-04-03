@@ -11,6 +11,7 @@ const answerRoute = require('./modules/answer/answerRoute');
 const sliderRoute = require('./modules/slider/sliderRoute');
 const ratingRoute = require('./modules/rating/ratingRoute');
 const enrollRoute = require('./modules/enroll/enrollRoute');
+const sectionRoute = require('./modules/section/sectionRoute');
 
 
 router.use('/category',categoryRoute);
@@ -23,6 +24,7 @@ router.use('/answer', answerRoute);
 router.use('/slider', sliderRoute);
 router.use('/rating', ratingRoute);
 router.use('/enroll',enrollRoute);
+router.use('/section',sectionRoute);
 
 
 

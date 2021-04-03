@@ -16,7 +16,10 @@ const enrollSchema = mongoose.Schema({
         type : Boolean,
         default : 1
     }
-})
+},
+{
+    timestamps: true,
+  })
 
 const enrollModel = mongoose.model('enroll',enrollSchema);
 module.exports = enrollModel;

@@ -9,12 +9,12 @@ const lessonSchema = mongoose.Schema({
         type : String,
         required : true,
     },
-    // course : {
-    //     type : 'course',
-    //     ref : mongoose.SchemaTypes.ObjectId,
-    //   required: true,
+    course : {
+        type :  mongoose.SchemaTypes.ObjectId,
+        ref : 'course',
+      required: true,
         
-    // },
+    },
     videoUrl : {
         type : String,
         required : true
@@ -33,6 +33,12 @@ const lessonSchema = mongoose.Schema({
         type : Boolean,
         defalt : 1
     }
+}
+    ,
+{
+    timestamps: true,
+
+
     })
 
     const lessonModel = mongoose.model('lesson',lessonSchema);

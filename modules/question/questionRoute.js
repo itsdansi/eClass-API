@@ -14,7 +14,6 @@ const mapToModule = require('../../helper/mapToModule')
 //    result: req.body
     } )
 
-
     question.save().then((result => {
         res.status(201).json(result);
     })).catch((err)=>{

@@ -15,7 +15,10 @@ const sliderSchema = mongoose.Schema({
         type : Boolean,
         default : 1,
     }
-})
+},
+{
+    timestamps: true,
+  })
 
 const sliderModel = mongoose.model('slider', sliderSchema);
 module.exports = sliderModel;

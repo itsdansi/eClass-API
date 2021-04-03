@@ -67,10 +67,41 @@ function mapToRating(rating, newRating){
     }
 }
 
+function mapToSection(section, newSection){
+    if(newSection.title){
+        section.title = newSection.title
+
+    }
+    if(newSection.course){
+        section.course = newSection.course
+    }
+    if(newSection.lesson)
+    {
+        section.lesson = newSection.lesson
+    }
+    if(newSection.lessonCompleted){
+        section.lessonCompleted = newSection.lessonCompleted
+    }
+    if(newSection.lessonStartsAt)
+    {
+        section.lessonStartsAt = newSection.lessonStartsAt
+    }
+    if(newSection.lessonEndsAt)
+    {
+        section.lessonEndsAt = newSection.lessonEndsAt
+    }
+    if(newSection.duration){
+        section.duration = newSection.duration
+    }
+    if(newSection.status){
+        section.status = newSection.status
+    }
+}
 
 module.exports = {
     mapToCourse,
     mapToAnswer,
     mapToSlider,
     mapToRating,
+    mapToSection
 }

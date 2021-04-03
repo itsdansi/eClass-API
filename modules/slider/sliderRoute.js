@@ -52,11 +52,10 @@ router.put('/:id', async(req, res)=>{
         mapToModule.mapToSlider(slider,req.body);
 
         const updatedSlider =  await slider.save();
-        // console.log(updatedAnswer)
         if(!slider){
          res.status(500).json({
              success:false,
-             message:  `No answer found with id : ${req.params.id}`
+             message:  `No slider found with id : ${req.params.id}`
          })
      }
      res.status(200).send(updatedSlider);

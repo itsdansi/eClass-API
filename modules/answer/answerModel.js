@@ -18,7 +18,10 @@ const answerSchema = mongoose.Schema({
         type : Boolean,
         default : 1
     }
-})
+},
+{
+    timestamps: true,
+  })
 
 const answerModel = mongoose.model('answer',answerSchema);
 module.exports = answerModel;

@@ -60,7 +60,11 @@ const courseSchema = mongoose.Schema({
         type : Boolean,
         default : 1
     }
-    })
+    },
+    {
+        timestamps: true,
+      })
+    
 
     const courseModel = mongoose.model('course',courseSchema);
     module.exports = courseModel;
