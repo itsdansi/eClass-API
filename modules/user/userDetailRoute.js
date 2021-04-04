@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const userDetailModel = require('./userDetailModel');
+const mapToModule = require('../../helper/mapToModule')
+const upload = require('../../middleware/imageUploader');
 
 // router for getting userDetails
 router.get('/',async (req, res)=>{
@@ -17,8 +19,17 @@ router.get('/',async (req, res)=>{
 })
 
 // router for saving userDetails
-router.post('/',async(req, res)=>{
-
+router.post('/', upload.single('image'), async(req, res,next)=>{
+    if (req.fileError) {
+        return next({
+          msg: req.fileError,
+          status: 400,
+        });
+      }
+   
+      if (req.file) {
+        req.body.image = req.file.filename;
+      }
     const user = new userDetailModel(  {
         name : req.body.name,
         image : req.body.image,
@@ -26,7 +37,7 @@ router.post('/',async(req, res)=>{
         user : req.body.user
 
     } )
-   // console.log(user)
+   
 
     user.save().then((createdUserDetail => {
         res.status(201).json(createdUserDetail);
@@ -43,17 +54,11 @@ router.put('/:id', async(req, res)=>{
     //     res.status(500).send("Invalid category id")
     // }
     // else{
-        const user = await userDetailModel.findByIdAndUpdate(
-        req.params.id,
-        {
-            name : req.body.name,
-            image : req.body.image,
-            gender : req.body.gender,
-            user : req.body.user
-         
-        },
-        {new:true}  
-        )
+        const user = await userDetailModel.findById(
+        req.params.id);
+
+        mapToModule.mapToUserDetail(user, req.body)
+       
         if(!user){
          res.status(500).json({
              success:false,

@@ -98,10 +98,26 @@ function mapToSection(section, newSection){
     }
 }
 
+function mapToUserDetail(ud, nud){
+  if(nud.user){
+      ud.user = nud.user
+  }
+  if(nud.image){
+      ud.image = nud.image
+  }
+  if(nud.gender){
+      ud.gender = nud.gender
+  }
+  if(nud.name){
+      ud.name = nud.name
+  }
+}
+
 module.exports = {
     mapToCourse,
     mapToAnswer,
     mapToSlider,
     mapToRating,
-    mapToSection
+    mapToSection,
+    mapToUserDetail
 }

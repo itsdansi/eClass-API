@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
+const { getVideoDurationInSeconds } = require('get-video-duration')
 const lessonModel = require('./lessonModel');
+const videoUpload = require('../../middleware/videoUploader');
 
 // Router & controller to get all lesson data
 router.get('/',async (req,res)=>{
@@ -15,7 +16,24 @@ router.get('/',async (req,res)=>{
 )
 
  // Router & controller save lesson data
- router.post('/',(req, res)=>{
+ router.post('/',videoUpload.single('videoUrl'),(req, res, next)=>{
+   //  console.log()
+    //  getVideoDurationInSeconds(process.cwd()+"/uploads/videos/"+req.file.filename).then((duration) => {
+    //     console.log(duration/60)
+    //   })
+
+
+    if (req.fileError) {
+        return next({
+          msg: req.fileError,
+          status: 400,
+        });
+      }
+
+   
+      if (req.file) {
+        req.body.videoUrl = req.file.filename;
+      }
     const lesson = new lessonModel(  {
       title : req.body.title,
         duration : req.body.duration,

@@ -10,7 +10,7 @@ const userDetailSchema = mongoose.Schema(
         type : String,
         required : true,
     },
-    image: [String],
+    image: String,
     gender: {
       type: String,
       enum: ["Male", "Female", "Others"],

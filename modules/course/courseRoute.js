@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const courseModel = require('./courseModel');
+const upload = require('../../middleware/imageUploader');
 
 
 
@@ -16,7 +17,17 @@ router.get('/',async(req, res) => {
 
 
 // Router & controller to add new course
-router.post('/',(req, res)=>{
+router.post('/',upload.single('thumbnail'), (req, res,next)=>{ 
+    if (req.fileError) {
+        return next({
+          msg: req.fileError,
+          status: 400,
+        });
+      }
+      if (req.file) {
+        req.body.thumbnail = req.file.filename;
+      }
+   
     const course = new courseModel(  {
       title : req.body.title,
       shortDesc : req.body.shortDesc,
@@ -34,8 +45,6 @@ router.post('/',(req, res)=>{
   //   hasDiscout : req.body.hasDiscout,
 //    result: req.body
     } )
-
-
     course.save().then((result => {
         res.status(201).json(result);
     })).catch((err)=>{
