@@ -1,13 +1,26 @@
 {
-    "API_URL" : "/api/v1",
-    "PORT" : "3002  ",
-    "url":"mongodb://localhost:27017",
-    "dbname":"eClass",
-    "DATABASE":{
-        "DB_URL" : "mongodb://localhost:27017",
-        "DB_NAME":"eClass"
+  "API_URL": "/api/v1",
+  "PORT": "3002  ",
+  "url": "mongodb://localhost:27017",
+  "dbname": "eClass",
+  "DATABASE": {
+    "DB_URL": "mongodb://localhost:27017",
+    "DB_NAME": "eClass"
+  },
+  "JWT": {
+    "JWT_SECRET": "sdskmdckl"
+  },
+  "BCRYPT": {
+    "SALT": 10
+  },
+  "EMAILFROM": "info@eClass-api.com",
+  "SMTPCONFIG": {
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "secure": false,
+    "auth": {
+      "user": "carter.kirlin42@ethereal.email",
+      "pass": "y7hfyMDM3VGpe6GSMk"
     }
-
-
+  }
 }
-
