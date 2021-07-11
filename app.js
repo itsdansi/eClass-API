@@ -24,25 +24,25 @@ app.use(`${api}/`, APIRoute);
 
 //Server connection
 app.listen(config.PORT, () => {
-    console.log(`Server is running at port : ${config.PORT}`);
-  });
+  console.log(`Server is running at port : ${config.PORT}`);
+});
 
 // //for pro
-// var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-// var server_host = process.env.YOUR_HOST || "0.0.0.0";
-// app.listen(server_port, server_host, (err, done) => {
-//   if (err) {
-//     console.log("Error while listening port " + app.get("port") + " >> " + err);
-//   } else {
-//     console.log("Server is listening at port " + app.get("port"));
-//   }
-// });
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || "0.0.0.0";
+app.listen(server_port, server_host, (err, done) => {
+  if (err) {
+    console.log("Error while listening port " + app.get("port") + " >> " + err);
+  } else {
+    console.log("Server is listening at port " + app.get("port"));
+  }
+});
 
 //For error handling
-app.use(function (err, req, res, next) {
-  console.log("Error handling middleware", err);
-  res.status(err.status || 400).json({
-    message: err.message || err,
-    status: err.status || 400,
-  });
-});
+// app.use(function (err, req, res, next) {
+//   console.log("Error handling middleware", err);
+//   res.status(err.status || 400).json({
+//     message: err.message || err,
+//     status: err.status || 400,
+//   });
+// });
