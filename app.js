@@ -23,9 +23,9 @@ const api = config.API_URL;
 app.use(`${api}/`, APIRoute);
 
 //Server connection
-app.listen(config.PORT, () => {
-  console.log(`Server is running at port : ${config.PORT}`);
-});
+// app.listen(config.PORT, () => {
+//   console.log(`Server is running at port : ${config.PORT}`);
+// });
 
 // //for pro
 var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
@@ -39,10 +39,10 @@ app.listen(server_port, server_host, (err, done) => {
 });
 
 //For error handling
-// app.use(function (err, req, res, next) {
-//   console.log("Error handling middleware", err);
-//   res.status(err.status || 400).json({
-//     message: err.message || err,
-//     status: err.status || 400,
-//   });
-// });
+app.use(function (err, req, res, next) {
+  console.log("Error handling middleware", err);
+  res.status(err.status || 400).json({
+    message: err.message || err,
+    status: err.status || 400,
+  });
+});
