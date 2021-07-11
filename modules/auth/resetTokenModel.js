@@ -10,6 +10,10 @@ const resetTokenSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    status: {
+      type: Number,
+      default: 0,
+    },
     expires: Date,
     createdByIp: String,
   },

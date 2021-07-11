@@ -1,6 +1,6 @@
 {
   "API_URL": "/api/v1",
-  "PORT": "3002  ",
+  "PORT": "3000",
   "url": "mongodb://localhost:27017",
   "dbname": "eClass",
   "DATABASE": {
@@ -15,12 +15,11 @@
   },
   "EMAILFROM": "info@eClass-api.com",
   "SMTPCONFIG": {
-    "host": "smtp.ethereal.email",
-    "port": 587,
-    "secure": false,
-    "auth": {
-      "user": "carter.kirlin42@ethereal.email",
-      "pass": "y7hfyMDM3VGpe6GSMk"
-    }
+    "service": "gmail",
+"auth": {
+"user": "linkwithproject0@gmail.com",
+"pass": "K4l!k4k074"
+}
   }
 }
+
