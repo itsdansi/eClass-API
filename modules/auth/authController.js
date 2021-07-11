@@ -59,7 +59,7 @@ function verifyUserToken(req, res, next) {
 }
 function verifyToken(req, res, next) {
   authService
-    .verifyToken(req.params.email, req.body, "forfpass")
+    .verifyToken(req.params.email, req.body.token, "forfpass")
     .then((result) => {
       res.status(200).json({
         result,
