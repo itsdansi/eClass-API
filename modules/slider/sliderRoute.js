@@ -13,7 +13,7 @@ router.get('/',async (req,res)=>
         res.status(500).json({success : false, message : "No slider found !"})
     }
     else
-    res.status(200).json({success : true, result : slider})
+    res.status(200).json(slider)
 }
 )
 

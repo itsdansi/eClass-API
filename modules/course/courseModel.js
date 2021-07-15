@@ -1,70 +1,72 @@
-const mongoose = require('mongoose');
-const courseSchema = mongoose.Schema({
-
-    title : {
-        type : String,
-        required : true,
+const mongoose = require("mongoose");
+const courseSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    shortDesc:{
-        type : String,
-
+    shortDesc: {
+      type: String,
     },
-    desc : {
-        type : String
+    thumbnail: {
+      type: String,
+      required: true,
     },
-    outcome : {
-        type : String,
+    desc: {
+      type: String,
     },
-    requirement : {
-        type : String,
+    outcome: {
+      type: String,
     },
-    courseIncludes : {
-        type : String,
+    requirement: {
+      type: String,
     },
-    category : {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref : 'category',
-        required : true,
+    courseIncludes: {
+      type: String,
     },
-    price : {
-        type : Number,
-        required : true
+    category: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "category",
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
     },
     // hasDiscount : {
     //     type : Boolean,
     //     default : true
     // },
-    discount : {
-        type : Number,
-        default : "0"
+    discount: {
+      type: Number,
+      default: "0",
     },
-    user : {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref : 'user',
-        required : true,
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    thumbnail: {
+      type: String,
+      required: true,
+    },
+    videoUrl: {
+      type: String,
+      required: true,
+    },
+    ifFeatured: {
+      type: Boolean,
+      default: 0,
+    },
+    status: {
+      type: Boolean,
+      default: 1,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-    },
-    thumbnail : {
-        type : String,
-
-    },
-    videoUrl : {
-        type : String,
-        required : true
-    },
-    ifFeatured : {
-        type : Boolean,
-        default : 0
-    },
-    status : {
-        type : Boolean,
-        default : 1
-    }
-    },
-    {
-        timestamps: true,
-      })
-    
-
-    const courseModel = mongoose.model('course',courseSchema);
-    module.exports = courseModel;
+const courseModel = mongoose.model("course", courseSchema);
+module.exports = courseModel;
