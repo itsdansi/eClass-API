@@ -36,7 +36,7 @@ app.listen(server_port, server_host, (err, done) => {
   } else {
     console.log("Server is listening at port " + app.get("port"));
   }
-// });
+});
 
 //For error handling
 app.use(function (err, req, res, next) {
