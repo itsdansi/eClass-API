@@ -1,42 +1,39 @@
-const mongoose = require('mongoose');
-const sectionSchema = mongoose.Schema({
+const mongoose = require("mongoose");
+const sectionSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
 
-    title : {
-        type : String,
-        required : true,
+    lessonCompleted: {
+      type: String,
+      required: true,
     },
-    lesson : {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref : 'lesson',
-        required : true,
+    duration: {
+      type: String,
+      required: true,
     },
-    lessonCompleted : {
-        type : String,
-        required : true,
+    course: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "course",
+      required: true,
     },
-    duration : {
-        type : String,
-        required : true,
+    lessonStartsAt: {
+      type: String,
     },
-    course : {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref : 'course',
-        required : true,
+    lessonEndsAt: {
+      type: String,
     },
-    lessonStartsAt :{
-        type : String,
+    status: {
+      type: Boolean,
+      default: 1,
     },
-    lessonEndsAt : {
-        type : String
-    },
-    status : {  
-        type : Boolean,
-        default : 1
-    }
-},
-{
+  },
+  {
     timestamps: true,
-  })
+  }
+);
 
-  const sectionModel = mongoose.model('section',sectionSchema);
-  module.exports = sectionModel;
+const sectionModel = mongoose.model("section", sectionSchema);
+module.exports = sectionModel;

@@ -8,10 +8,6 @@ const courseSchema = mongoose.Schema(
     shortDesc: {
       type: String,
     },
-    thumbnail: {
-      type: String,
-      required: true,
-    },
     desc: {
       type: String,
     },
@@ -48,13 +44,13 @@ const courseSchema = mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      required: true,
+      // required: true,
     },
     videoUrl: {
       type: String,
       required: true,
     },
-    ifFeatured: {
+    isFeatured: {
       type: Boolean,
       default: 0,
     },

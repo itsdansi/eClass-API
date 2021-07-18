@@ -2,18 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 const courseModel = require("./courseModel");
-const upload = require("../../middleware/imageUploader");
+const upload = require("../../middleware/videoUploader");
 
+// Router & controller to get all courses
 router.get("/", async (req, res) => {
   const course = await courseModel.find();
   if (!course) {
-    res.status(500).json({ success: false, message: "No course found !" });
+    res.status(500).json({ message: "No course found !" });
   }
-  res.status(200).json({ success: true, message: course });
+  res.status(200).json(course);
 });
 
 // Router & controller to add new course
-router.post("/", upload.single("thumbnail"), (req, res, next) => {
+router.post("/", upload.single("videoUrl"), (req, res, next) => {
   if (req.fileError) {
     return next({
       msg: req.fileError,
@@ -21,7 +22,7 @@ router.post("/", upload.single("thumbnail"), (req, res, next) => {
     });
   }
   if (req.file) {
-    req.body.thumbnail = req.file.filename;
+    req.body.videoUrl = req.file.filename;
   }
 
   const course = new courseModel({
@@ -36,7 +37,6 @@ router.post("/", upload.single("thumbnail"), (req, res, next) => {
     price: req.body.price,
     discount: req.body.discount,
     user: req.body.user,
-    thumbnail: req.body.thumbnail,
     videoUrl: req.body.videoUrl,
     isFeatured: req.body.isFeatured,
     //   hasDiscout : req.body.hasDiscout,
@@ -55,6 +55,7 @@ router.post("/", upload.single("thumbnail"), (req, res, next) => {
     });
 });
 
+//  Router & controller to update a course data by Id
 router.put("/:id", async (req, res) => {
   const course = await courseModel.findByIdAndUpdate(
     req.params.id,
@@ -78,14 +79,14 @@ router.put("/:id", async (req, res) => {
   );
   if (!course) {
     res.status(500).json({
-      success: false,
       message: `No course with Id : ${req.body.id} found.`,
     });
+  } else {
+    res.status(200).send(course);
   }
-  res.status(200).send(course);
 });
 
-//  Router & controller to get a course data by Id
+//  Router & controller to delete a course data by Id
 router.delete("/:id", (req, res) => {
   courseModel
     .findByIdAndRemove(req.params.id)
@@ -93,11 +94,9 @@ router.delete("/:id", (req, res) => {
       if (course) {
         return res
           .status(200)
-          .json({ success: true, message: "Course is deleted successfully" });
+          .json({ message: "Course is deleted successfully" });
       } else {
-        return res
-          .status(404)
-          .json({ success: false, message: "Course not found" });
+        return res.status(404).json({ message: "Course not found" });
       }
     })
     .catch((err) => {
@@ -124,6 +123,15 @@ router.get("/get/count", async (req, res) => {
       success: false,
     });
   } else res.send({ courseCount: courseCount });
+});
+
+// Router & controller to get featured courses
+router.get("/get/featured", async (req, res) => {
+  const featured = await courseModel.findOne({ isFeatured: "1" });
+  // const course = await courseModel.find();
+  if (featured) {
+    res.send(featured);
+  } else res.send("No featured course found!");
 });
 
 module.exports = router;
