@@ -25,7 +25,7 @@ const conxn = config.url + "/" + config.dbname;
 //for remote
 mongoose.connect(
   "mongodb+srv://debid:D4v!d123@cluster0.bumti.mongodb.net/eclass?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   function (err, done) {
     if (err) {
       console.log("Error connecting to db >>" + err);

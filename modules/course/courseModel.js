@@ -8,10 +8,6 @@ const courseSchema = mongoose.Schema(
     shortDesc: {
       type: String,
     },
-    thumbnail: {
-      type: String,
-      required: true,
-    },
     desc: {
       type: String,
     },
@@ -54,7 +50,7 @@ const courseSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    ifFeatured: {
+    isFeatured: {
       type: Boolean,
       default: 0,
     },
