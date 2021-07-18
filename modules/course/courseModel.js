@@ -44,7 +44,7 @@ const courseSchema = mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      required: true,
+      // required: true,
     },
     videoUrl: {
       type: String,

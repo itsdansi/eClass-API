@@ -45,7 +45,7 @@ router.post("/", upload.single("videoUrl"), (req, res, next) => {
   course
     .save()
     .then((result) => {
-      res.status(201).json({ result });
+      res.status(201).json(result);
     })
     .catch((err) => {
       res.status(500).json({

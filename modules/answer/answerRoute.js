@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
   const answer = await answerModel.find();
   if (!answer) {
     res.status(500).json({ message: "No answer found !" });
-  } else res.status(200).json({ result: answer });
+  } else res.status(200).json(answer);
 });
 
 // Router & controller to update a answer by Id
