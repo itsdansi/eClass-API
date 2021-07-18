@@ -6,6 +6,7 @@ const enrollModel = require("./enrollModel");
 router.post("/", (req, res) => {
   const enroll = new enrollModel({
     course: req.body.course,
+    user: req.body.user,
     status: req.body.status,
   });
 
