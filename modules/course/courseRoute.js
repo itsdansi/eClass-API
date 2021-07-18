@@ -127,11 +127,20 @@ router.get("/get/count", async (req, res) => {
 
 // Router & controller to get featured courses
 router.get("/get/featured", async (req, res) => {
-  const featured = await courseModel.findOne({ isFeatured: "1" });
+  const featured = await courseModel.find({ isFeatured: "1" });
   // const course = await courseModel.find();
   if (featured) {
     res.send(featured);
   } else res.send("No featured course found!");
 });
+
+// // Router & controller to get popular courses
+// router.get("/get/featured", async (req, res) => {
+//   const featured = await courseModel.findOne({ isFeatured: "1" });
+//   // const course = await courseModel.find();
+//   if (featured) {
+//     res.send(featured);
+//   } else res.send("No featured course found!");
+// });
 
 module.exports = router;
