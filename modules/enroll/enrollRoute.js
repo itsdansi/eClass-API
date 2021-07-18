@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
 
 // Router & controller to get all enroll data
 router.get("/", async (req, res) => {
-  const enroll = await enrollModel.find();
+  const enroll = await enrollModel.find().populate("course");
   if (!enroll) {
     res.status(500).json({ success: false, message: "No enroll found !" });
   } else res.status(200).json(enroll);
@@ -53,7 +53,10 @@ router.delete("/:id", (req, res) => {
 
 // Router & controller to get a enroll data by Id
 router.get("/:id", async (req, res) => {
-  const enroll = await enrollModel.findById(req.params.id);
+  const enroll = await enrollModel
+    .findById(req.params.id)
+    .populate("course")
+    .exec();
   if (!enroll) {
     res.status(500).json({
       success: false,
@@ -68,6 +71,48 @@ router.get("/get/count", async (req, res) => {
   if (!enrollCount) {
     res.status(500).json({
       success: false,
+    });
+  } else res.send({ enrollCount: enrollCount });
+});
+
+// Router & controller to get all enroll data by a single user
+router.get("/user/:id", async (req, res) => {
+  // console.log(req.params);
+  const enroll = await enrollModel
+    .find({ user: req.params.id })
+    .populate("course");
+  if (!enroll) {
+    res.status(500).json({
+      success: false,
+      message: "No enroll found with that id",
+    });
+  } else res.status(200).send(enroll);
+});
+
+// Router & controller to count all enroll by a single user
+router.get("/count/:uid", async (req, res) => {
+  // console.log(req.params);
+  const enrollCount = await enrollModel
+    .find({ user: req.params.uid })
+    .countDocuments((count) => count);
+  if (!enrollCount) {
+    res.status(500).json({
+      success: false,
+      message: "No enroll found with that id",
+    });
+  } else res.send({ enrollCount: enrollCount });
+});
+
+// Router & controller to count all enroll in a single course
+router.get("/course/:cid", async (req, res) => {
+  // console.log(req.params);
+  const enrollCount = await enrollModel
+    .find({ course: req.params.cid })
+    .countDocuments((count) => count);
+  if (!enrollCount) {
+    res.status(500).json({
+      success: false,
+      message: "No enroll found with that id",
     });
   } else res.send({ enrollCount: enrollCount });
 });

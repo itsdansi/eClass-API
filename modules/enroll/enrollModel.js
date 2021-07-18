@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const enrollSchema = mongoose.Schema(
   {
     course: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "course",
       required: true,
     },
@@ -13,7 +13,7 @@ const enrollSchema = mongoose.Schema(
     //     expires : '1d'
     // },
     user: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "user",
       required: true,
     },

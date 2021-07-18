@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const courseModel = require("./courseModel");
+const enrollModel = require("./../enroll/enrollModel");
 const upload = require("../../middleware/videoUploader");
 
 // Router & controller to get all courses
 router.get("/", async (req, res) => {
+  console.log(req.body);
   const course = await courseModel.find();
   if (!course) {
     res.status(500).json({ message: "No course found !" });
@@ -106,13 +108,26 @@ router.delete("/:id", (req, res) => {
 
 //  Router & controller to get a course data by Id
 router.get("/:id", async (req, res) => {
-  const course = await courseModel.findById(req.params.id);
+  const course = await courseModel.findById(req.params.id).lean();
   if (!course) {
     res.status(500).json({
       success: false,
       message: "No course found with that id",
     });
-  } else res.status(200).send(course);
+  } else {
+    const enrollCount = await enrollModel
+      .find({ course: course })
+      .countDocuments((count) => count);
+
+    if (!enrollCount) {
+      res.status(500).json({
+        success: false,
+        message: "No enroll found with that id",
+      });
+    }
+    course.enrollCount = enrollCount;
+    res.status(200).send(course);
+  }
 });
 
 // Router & controller to count total course
@@ -134,13 +149,49 @@ router.get("/get/featured", async (req, res) => {
   } else res.send("No featured course found!");
 });
 
-// // Router & controller to get popular courses
-// router.get("/get/featured", async (req, res) => {
-//   const featured = await courseModel.findOne({ isFeatured: "1" });
-//   // const course = await courseModel.find();
-//   if (featured) {
-//     res.send(featured);
-//   } else res.send("No featured course found!");
-// });
+// Router & controller to get popular courses
+router.get("/get/topcourse", async (req, res) => {
+  const enroll = await enrollModel.find().populate("course");
+  const course = await courseModel.find();
+  const xyz = [];
+  // console.log(course.id);
+  enroll.forEach((item, index) => {
+    //  console.log();
+    course.forEach((c) => {
+      if (item.course.id == c.id) {
+        console.log(c.id);
+        xyz.push(c.id);
+      }
+    });
+  });
+  console.log(xyz);
+
+  const array = [
+    { id: 12, name: "toto" },
+    { id: 12, name: "toto" },
+    { id: 42, name: "tutu" },
+    { id: 12, name: "toto" },
+  ];
+
+  const id = 12;
+  const count = array.reduce((acc, cur) => (cur.id === id ? ++acc : acc), 0);
+
+  console.log(count);
+
+  //console.log(enroll);
+  // if (!enrollCount) {
+  //   res.status(500).json({
+  //     success: false,
+  //     message: "No enroll found with that id",
+  //   });
+  // }
+
+  //const enrollModel = await enrollModel
+  // const featured = await courseModel.findOne({ isFeatured: "1" });
+  // // const course = await courseModel.find();
+  // if (featured) {
+  //   res.send(featured);
+  // } else res.send("No featured course found!");
+});
 
 module.exports = router;
