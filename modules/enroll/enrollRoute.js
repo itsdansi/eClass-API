@@ -3,13 +3,16 @@ const router = require("express").Router();
 const enrollModel = require("./enrollModel");
 
 // Router & controller save enroll data
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const enroll = new enrollModel({
     course: req.body.course,
     user: req.body.user,
     status: req.body.status,
   });
-
+  // const checkEnroll = await enrollModel
+  //   .findOne({ course: course })
+  //   .populate("user");
+  // console.log(checkEnroll);
   enroll
     .save()
     .then((result) => {

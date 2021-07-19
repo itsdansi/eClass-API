@@ -128,4 +128,33 @@ router.get("/get/count", async (req, res) => {
     });
   } else res.send({ lessonCount: lessonCount });
 });
+
+// Router & controller to get all lesson in a single section
+router.get("/section/:sid", async (req, res) => {
+  // console.log(req.params);
+  const lesson = await lessonModel.find({ section: req.params.sid });
+
+  if (!lesson) {
+    res.status(500).json({
+      success: false,
+      message: "No lesson found with that section id",
+    });
+  } else res.send(lesson);
+});
+
+// Router & controller to count all lesson in a single section
+router.get("/count/section/:sid", async (req, res) => {
+  // console.log(req.params);
+  const lessonCount = await lessonModel
+    .find({ section: req.params.sid })
+    .countDocuments((count) => count);
+
+  if (!lessonCount) {
+    res.status(500).json({
+      success: false,
+      message: "No lesson found with that section id",
+    });
+  } else res.status(200).json({ lessonCount: lessonCount });
+});
+
 module.exports = router;
