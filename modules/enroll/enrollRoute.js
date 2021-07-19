@@ -9,21 +9,26 @@ router.post("/", async (req, res) => {
     user: req.body.user,
     status: req.body.status,
   });
-  // const checkEnroll = await enrollModel
-  //   .findOne({ course: course })
-  //   .populate("user");
+  const checkEnroll = await enrollModel.findOne({
+    course: req.body.course,
+    user: req.body.user,
+  });
   // console.log(checkEnroll);
-  enroll
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        error: err,
+  if (checkEnroll) {
+    res.status(500).json({ message: "User already enrolled in this course" });
+  } else {
+    enroll
+      .save()
+      .then((result) => {
+        res.status(201).json(result);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          error: err,
+        });
       });
-    });
+  }
 });
 
 // Router & controller to get all enroll data

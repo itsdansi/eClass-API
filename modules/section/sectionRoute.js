@@ -8,7 +8,6 @@ const mapToModule = require("../../helper/mapToModule");
 router.post("/", (req, res) => {
   const section = new sectionModel({
     title: req.body.title,
-    lesson: req.body.lesson,
     lessonCompleted: req.body.lessonCompleted,
     lessonStartsAt: req.body.lessonStartsAt,
     lessonEndsAt: req.body.lessonEndsAt,
