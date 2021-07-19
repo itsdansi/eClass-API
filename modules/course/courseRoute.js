@@ -38,7 +38,7 @@ router.post("/", upload.single("videoUrl"), (req, res, next) => {
     category: req.body.category,
     price: req.body.price,
     discount: req.body.discount,
-    user: req.body.user,
+    tutor: req.body.tutor,
     videoUrl: req.body.videoUrl,
     isFeatured: req.body.isFeatured,
     //   hasDiscout : req.body.hasDiscout,
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
       category: req.body.category,
       price: req.body.price,
       discount: req.body.discount,
-      user: req.body.user,
+      tutor: req.body.tutor,
       thumbnail: req.body.thumbnail,
       videoUrl: req.body.videoUrl,
       isFeatured: req.body.isFeatured,
@@ -140,6 +140,19 @@ router.get("/get/count", async (req, res) => {
   } else res.send({ courseCount: courseCount });
 });
 
+// Router & controller to count all enroll in a single course
+router.get("/tutor/:tid", async (req, res) => {
+  // console.log(req.params);
+  const courseCount = await courseModel.find({ tutor: req.params.tid });
+
+  if (!courseCount) {
+    res.status(500).json({
+      success: false,
+      message: "No course found with that tutor id",
+    });
+  } else res.send(courseCount);
+});
+
 // Router & controller to get featured courses
 router.get("/get/featured", async (req, res) => {
   const featured = await courseModel.find({ isFeatured: "1" });
@@ -149,49 +162,49 @@ router.get("/get/featured", async (req, res) => {
   } else res.send("No featured course found!");
 });
 
-// Router & controller to get popular courses
-router.get("/get/topcourse", async (req, res) => {
-  const enroll = await enrollModel.find().populate("course");
-  const course = await courseModel.find();
-  const xyz = [];
-  // console.log(course.id);
-  enroll.forEach((item, index) => {
-    //  console.log();
-    course.forEach((c) => {
-      if (item.course.id == c.id) {
-        console.log(c.id);
-        xyz.push(c.id);
-      }
-    });
-  });
-  console.log(xyz);
+// // Router & controller to get popular courses
+// router.get("/get/topcourse", async (req, res) => {
+//   const enroll = await enrollModel.find().populate("course");
+//   const course = await courseModel.find();
+//   const xyz = [];
+//   // console.log(course.id);
+//   enroll.forEach((item, index) => {
+//     //  console.log();
+//     course.forEach((c) => {
+//       if (item.course.id == c.id) {
+//         console.log(c.id);
+//         xyz.push(c.id);
+//       }
+//     });
+//   });
+//   console.log(xyz);
 
-  const array = [
-    { id: 12, name: "toto" },
-    { id: 12, name: "toto" },
-    { id: 42, name: "tutu" },
-    { id: 12, name: "toto" },
-  ];
+//   const array = [
+//     { id: 12, name: "toto" },
+//     { id: 12, name: "toto" },
+//     { id: 42, name: "tutu" },
+//     { id: 12, name: "toto" },
+//   ];
 
-  const id = 12;
-  const count = array.reduce((acc, cur) => (cur.id === id ? ++acc : acc), 0);
+//   const id = 12;
+//   const count = array.reduce((acc, cur) => (cur.id === id ? ++acc : acc), 0);
 
-  console.log(count);
+//   console.log(count);
 
-  //console.log(enroll);
-  // if (!enrollCount) {
-  //   res.status(500).json({
-  //     success: false,
-  //     message: "No enroll found with that id",
-  //   });
-  // }
+//console.log(enroll);
+// if (!enrollCount) {
+//   res.status(500).json({
+//     success: false,
+//     message: "No enroll found with that id",
+//   });
+// }
 
-  //const enrollModel = await enrollModel
-  // const featured = await courseModel.findOne({ isFeatured: "1" });
-  // // const course = await courseModel.find();
-  // if (featured) {
-  //   res.send(featured);
-  // } else res.send("No featured course found!");
-});
+//const enrollModel = await enrollModel
+// const featured = await courseModel.findOne({ isFeatured: "1" });
+// // const course = await courseModel.find();
+// if (featured) {
+//   res.send(featured);
+// } else res.send("No featured course found!");
+// });
 
 module.exports = router;

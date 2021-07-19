@@ -6,7 +6,10 @@ const videoUpload = require("../../middleware/videoUploader");
 
 // Router & controller to get all lesson data
 router.get("/", async (req, res) => {
-  const lesson = await lessonModel.find().populate("category");
+  const lesson = await lessonModel
+    .find()
+    // .populate("course", "title thumbnail")
+    .populate("section", "_id:0 title");
   if (!lesson) {
     res.status(500).json({ success: false, message: "No lesson found !" });
   } else res.status(200).json(lesson);
@@ -33,6 +36,7 @@ router.post("/", videoUpload.single("videoUrl"), (req, res, next) => {
     title: req.body.title,
     duration: req.body.duration,
     course: req.body.course,
+    section: req.body.section,
     videoUrl: req.body.videoUrl,
     lessonType: req.body.lessonType,
     status: req.body.status,
@@ -64,6 +68,7 @@ router.put("/:id", async (req, res) => {
       title: req.body.title,
       duration: req.body.duration,
       course: req.body.course,
+      section: req.body.section,
       videoUrl: req.body.videoUrl,
       lessonType: req.body.lessonType,
       status: req.body.status,
@@ -102,7 +107,10 @@ router.delete("/:id", (req, res) => {
 
 // Router & controller to get a lesson data by Id
 router.get("/:id", async (req, res) => {
-  const lesson = await lessonModel.findById(req.params.id);
+  const lesson = await lessonModel
+    .findById(req.params.id)
+    .populate("course", "title thumbnail")
+    .populate("section", "title");
   if (!lesson) {
     res.status(500).json({
       success: false,

@@ -55,7 +55,7 @@ router.delete("/:id", (req, res) => {
 
 // Router & controller to get a tutor data by Id
 router.get("/:id", async (req, res) => {
-  if (!helper.isValidId(id)) throw "Invalid tutor id:" + ` ${id}`;
+  if (!helper.isValidId(req.params.id)) throw "Invalid tutor id:" + ` ${id}`;
   const tutor = await tutorModel.findById(req.params.id);
   if (!tutor) {
     res.status(500).json({

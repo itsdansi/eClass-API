@@ -6,16 +6,16 @@ const sectionSchema = mongoose.Schema(
       required: true,
     },
 
-    lessonCompleted: {
-      type: String,
-      required: true,
-    },
+    // lessonCompleted: {
+    //   type: String,
+    //   required: true,
+    // },
     duration: {
       type: String,
       required: true,
     },
     course: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "course",
       required: true,
     },
