@@ -92,4 +92,17 @@ router.get("/get/count", async (req, res) => {
   } else res.send({ sectionCount: sectionCount });
 });
 
+// Router & controller to get all section in a single course
+router.get("/course/:cid", async (req, res) => {
+  // console.log(req.params);
+  const section = await sectionModel.find({ course: req.params.cid });
+
+  if (!section) {
+    res.status(500).json({
+      success: false,
+      message: "No section found with that course id",
+    });
+  } else res.send(section);
+});
+
 module.exports = router;

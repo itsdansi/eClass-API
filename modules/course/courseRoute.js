@@ -140,7 +140,7 @@ router.get("/get/count", async (req, res) => {
   } else res.send({ courseCount: courseCount });
 });
 
-// Router & controller to count all enroll in a single course
+// Router & controller to get all course by a single tutor
 router.get("/tutor/:tid", async (req, res) => {
   // console.log(req.params);
   const courseCount = await courseModel.find({ tutor: req.params.tid });
