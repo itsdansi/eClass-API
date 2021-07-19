@@ -21,7 +21,7 @@ const courseSchema = mongoose.Schema(
       type: String,
     },
     category: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "category",
       required: true,
     },
@@ -37,11 +37,16 @@ const courseSchema = mongoose.Schema(
       type: Number,
       default: "0",
     },
-    user: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "user",
+    tutor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "tutor",
       required: true,
     },
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "user",
+    //   required: true,
+    // },
     thumbnail: {
       type: String,
       // required: true,
