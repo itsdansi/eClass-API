@@ -13,6 +13,7 @@ const ratingRoute = require("./modules/rating/ratingRoute");
 const enrollRoute = require("./modules/enroll/enrollRoute");
 const sectionRoute = require("./modules/section/sectionRoute");
 const tutorRoute = require("./modules/tutor/tutorRoute");
+const favoriteRoute = require("./modules/favorite/favoriteRoute");
 const authRoute = require("./modules/auth/authRoute");
 
 router.use("/category", categoryRoute);
@@ -27,6 +28,7 @@ router.use("/rating", ratingRoute);
 router.use("/enroll", enrollRoute);
 router.use("/section", sectionRoute);
 router.use("/tutor", tutorRoute);
+router.use("/favorite", favoriteRoute);
 router.use("/auth", authRoute);
 
 module.exports = router;
