@@ -40,7 +40,7 @@ function changePassword(req, res, next) {
     .chPassword(email, password)
     .then((result) => {
       res.status(200).json({
-        message: "Your password change successfully, you can now login",
+        message: "Password changed successfully, you can now login",
       });
     })
     .catch((err) => next(err));

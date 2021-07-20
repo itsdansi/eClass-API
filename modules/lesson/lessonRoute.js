@@ -157,4 +157,19 @@ router.get("/count/section/:sid", async (req, res) => {
   } else res.status(200).json({ lessonCount: lessonCount });
 });
 
+// Router & controller to count all lesson in a single section
+router.get("/count/course/:cid", async (req, res) => {
+  // console.log(req.params);
+  const lessonCount = await lessonModel
+    .find({ course: req.params.cid })
+    .countDocuments((count) => count);
+
+  if (!lessonCount) {
+    res.status(500).json({
+      success: false,
+      message: "No lesson found with that course id",
+    });
+  } else res.status(200).json({ countLessonByCourseId: lessonCount });
+});
+
 module.exports = router;
