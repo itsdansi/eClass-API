@@ -14,6 +14,7 @@ const enrollRoute = require("./modules/enroll/enrollRoute");
 const sectionRoute = require("./modules/section/sectionRoute");
 const tutorRoute = require("./modules/tutor/tutorRoute");
 const favoriteRoute = require("./modules/favorite/favoriteRoute");
+const lessonTrackerRoute = require("./modules/lessonTracker/lessonTrackerRoute");
 const authRoute = require("./modules/auth/authRoute");
 
 router.use("/category", categoryRoute);
@@ -29,6 +30,7 @@ router.use("/enroll", enrollRoute);
 router.use("/section", sectionRoute);
 router.use("/tutor", tutorRoute);
 router.use("/favorite", favoriteRoute);
+router.use("/lessonTracker", lessonTrackerRoute);
 router.use("/auth", authRoute);
 
 module.exports = router;
