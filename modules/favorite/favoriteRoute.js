@@ -5,24 +5,33 @@ const favoriteModel = require("./favoriteModel");
 // const mapToModule = require("../../helper/mapToModule");
 
 // Router & controller create a fovorite
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const fovorite = new favoriteModel({
     user: req.body.user,
     course: req.body.course,
     status: req.body.status,
   });
 
-  fovorite
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        error: err,
+  const checkFavorite = await favoriteModel.findOne({
+    course: req.body.course,
+    user: req.body.user,
+  });
+  // console.log(checkEnroll);
+  if (checkFavorite) {
+    res.status(500).json({ message: "Already favorited!" });
+  } else {
+    fovorite
+      .save()
+      .then((result) => {
+        res.status(201).json(result);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          error: err,
+        });
       });
-    });
+  }
 });
 
 // Router to get all fovorites
