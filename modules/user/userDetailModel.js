@@ -6,22 +6,29 @@ const userDetailSchema = mongoose.Schema(
       ref: "user",
       required: true,
     },
-    name : {
-        type : String,
-        required : true,
-    },
-    image: String,
-    gender: {
+    name: {
       type: String,
-      enum: ["Male", "Female", "Others"],
       required: true,
     },
+    image: String,
+    address: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    // gender: {
+    //   type: String,
+    //   enum: ["Male", "Female", "Others"],
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
   }
 );
-
 
 const userDetailModel = mongoose.model("userDetail", userDetailSchema);
 module.exports = userDetailModel;
