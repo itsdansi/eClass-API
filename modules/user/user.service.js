@@ -25,7 +25,7 @@ async function findById(id) {
 //function find by email
 async function findByEmail(email) {
   const user = await userModel.findOne({ email: email });
-  if (!user) throw "User with" + ` ${email} ` + "not found";
+  if (!user) throw "User with email_id: " + ` ${email} ` + "not found";
   return user;
 }
 

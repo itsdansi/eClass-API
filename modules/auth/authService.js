@@ -83,12 +83,27 @@ async function verifyToken(email, token, forwho) {
   }
 }
 
-//change password
+//change password through forget password option
 async function chPassword(email, password) {
   const user = await userService.findByEmail(email);
   const hashPasword = bcrypt.hashSync(password, config.BCRYPT.SALT);
   user.password = hashPasword;
   return user.save();
+}
+
+//change password after login
+async function chPasswordAfterLogin(email, password, newPassword) {
+  const user = await userService.findByEmail(email);
+  const hashPasword = bcrypt.hashSync(password, config.BCRYPT.SALT);
+  const newHashPasword = bcrypt.hashSync(newPassword, config.BCRYPT.SALT);
+  const passwordCheck = bcrypt.compareSync(user.password, hashPasword);
+  console.log(passwordCheck);
+  if (passwordCheck) {
+    user.password = newHashPasword;
+    return user.save();
+  } else {
+    throw (msg = "Incorrect password!");
+  }
 }
 
 // create a jwt token containing the user id
@@ -148,4 +163,5 @@ module.exports = {
   verifyToken,
   chPassword,
   fPassword,
+  chPasswordAfterLogin,
 };

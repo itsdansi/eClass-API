@@ -22,6 +22,21 @@ function userRegister(req, res, next) {
     .catch((err) => next(err));
 }
 
+// function to change password after login
+function changePasswordAfterlogin(req, res, next) {
+  const email = req.params.email;
+  const password = req.body.password;
+  const newPassword = req.body.newPassword;
+  authService
+    .chPasswordAfterLogin(email, password, newPassword)
+    .then((result) => {
+      res.status(200).json({
+        message: "Password changed successfully! ",
+      });
+    })
+    .catch((err) => next(err));
+}
+
 function forgotPassword(req, res, next) {
   authService
     .fPassword(req.body.email, req.ip)
@@ -33,6 +48,7 @@ function forgotPassword(req, res, next) {
     .catch((err) => next(err));
 }
 
+// function to change password through forgot-password option
 function changePassword(req, res, next) {
   const email = req.params.email;
   const password = req.body.password;
@@ -76,4 +92,5 @@ module.exports = {
   verifyUserToken,
   verifyToken,
   changePassword,
+  changePasswordAfterlogin,
 };
